@@ -25,15 +25,20 @@ public class IControllerEmployeImpl  {
 	@Autowired
 	ITimesheetService itimesheetservice;
 
+	
+	
 	public int ajouterEmploye(Employe employe)
 	{
 		iemployeservice.ajouterEmploye(employe);
+		
+		System.out.println("karim");
+		
 		return employe.getId();
 	}
     
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		iemployeservice.mettreAjourEmailByEmployeId(email, employeId);
-		
+		System.out.println("test1");
 	}
 
 	public void affecterEmployeADepartement(int employeId, int depId) {
