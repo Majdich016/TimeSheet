@@ -33,7 +33,9 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	public int ajouterEmploye(Employe employe) {
 		employeRepository.save(employe);
+		System.out.println("test git");
 		return employe.getId();
+
 	}
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
