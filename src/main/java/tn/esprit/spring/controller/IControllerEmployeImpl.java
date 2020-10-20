@@ -11,9 +11,7 @@ import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.entities.Timesheet;
-import tn.esprit.spring.services.IEmployeService;
-import tn.esprit.spring.services.IEntrepriseService;
-import tn.esprit.spring.services.ITimesheetService;
+import tn.esprit.spring.services.*;
 
 
 @Controller
@@ -24,6 +22,10 @@ public class IControllerEmployeImpl  {
 	IEntrepriseService ientrepriseservice;
 	@Autowired
 	ITimesheetService itimesheetservice;
+	@Autowired
+	IContratService iContratService;
+	@Autowired
+	IDepartementService iDepartementService;
 
 	
 	
@@ -42,7 +44,7 @@ public class IControllerEmployeImpl  {
 	}
 
 	public void affecterEmployeADepartement(int employeId, int depId) {
-		iemployeservice.affecterEmployeADepartement(employeId, depId);
+		iDepartementService.affecterEmployeADepartement(employeId, depId);
 		
 	}
 
@@ -50,12 +52,12 @@ public class IControllerEmployeImpl  {
 	
 	public void desaffecterEmployeDuDepartement(int employeId, int depId)
 	{
-		iemployeservice.desaffecterEmployeDuDepartement(employeId, depId);
+		iDepartementService.desaffecterEmployeDuDepartement(employeId, depId);
 	}
 
 	
 	public int ajouterContrat(Contrat contrat) {
-		iemployeservice.ajouterContrat(contrat);
+		iContratService.ajouterContrat(contrat);
 		return contrat.getReference();
 	}
 	
@@ -66,16 +68,16 @@ public class IControllerEmployeImpl  {
 
 	
 	public String getEmployePrenomById(int employeId) {
-		return iemployeservice.getEmployePrenomById(employeId);
+		return iContratService.getEmployePrenomById(employeId);
 	}
 
 	
 	public void deleteEmployeById(int employeId) {
-		iemployeservice.deleteEmployeById(employeId);
+		iContratService.deleteEmployeById(employeId);
 		
 	}
 	public void deleteContratById(int contratId) {
-		iemployeservice.deleteContratById(contratId);
+		iContratService.deleteContratById(contratId);
 	}
 
 	
@@ -92,18 +94,18 @@ public class IControllerEmployeImpl  {
 
 	
 	public List<Employe> getAllEmployeByEntreprise(Entreprise entreprise) {
-		return iemployeservice.getAllEmployeByEntreprise(entreprise);
+		return iDepartementService.getAllEmployeByEntreprise(entreprise);
 	}
 
 
 	public void mettreAjourEmailByEmployeIdJPQL(String email, int employeId) {	
-	iemployeservice.mettreAjourEmailByEmployeIdJPQL(email, employeId);
+	iDepartementService.mettreAjourEmailByEmployeIdJPQL(email, employeId);
 		
 	}
 
 
 	public void deleteAllContratJPQL() {
-		iemployeservice.deleteAllContratJPQL();
+		iContratService.deleteAllContratJPQL();
 		
 	}
 
@@ -116,14 +118,14 @@ public class IControllerEmployeImpl  {
 
 	public Double getSalaireMoyenByDepartementId(int departementId) {
 		// TODO Auto-generated method stub
-		return iemployeservice.getSalaireMoyenByDepartementId(departementId);
+		return iDepartementService.getSalaireMoyenByDepartementId(departementId);
 	}
 
 	
 	
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
 			Date dateFin) {
-		return iemployeservice.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
+		return iContratService.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
 	}
 
 

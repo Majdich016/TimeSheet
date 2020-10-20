@@ -22,9 +22,7 @@ import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Mission;
 import tn.esprit.spring.entities.Timesheet;
-import tn.esprit.spring.services.IEmployeService;
-import tn.esprit.spring.services.IEntrepriseService;
-import tn.esprit.spring.services.ITimesheetService;
+import tn.esprit.spring.services.*;
 
 @RestController
 public class RestControlEmploye {
@@ -36,6 +34,10 @@ public class RestControlEmploye {
 	IEntrepriseService ientrepriseservice;
 	@Autowired
 	ITimesheetService itimesheetservice;
+	@Autowired
+	IContratService iContratService;
+	@Autowired
+	IDepartementService iDepartementService;
 
 	
 	// http://localhost:8081/SpringMVC/servlet/ajouterEmployer
@@ -59,7 +61,7 @@ public class RestControlEmploye {
 	// http://localhost:8081/SpringMVC/servlet/affecterEmployeADepartement/1/1
 	@PutMapping(value = "/affecterEmployeADepartement/{idemp}/{iddept}") 
 	public void affecterEmployeADepartement(@PathVariable("idemp")int employeId, @PathVariable("iddept")int depId) {
-		iemployeservice.affecterEmployeADepartement(employeId, depId);
+		iDepartementService.affecterEmployeADepartement(employeId, depId);
 		
 	}
 	
@@ -67,7 +69,7 @@ public class RestControlEmploye {
 	@PutMapping(value = "/desaffecterEmployeDuDepartement/{idemp}/{iddept}") 
 	public void desaffecterEmployeDuDepartement(@PathVariable("idemp")int employeId, @PathVariable("iddept")int depId)
 	{
-		iemployeservice.desaffecterEmployeDuDepartement(employeId, depId);
+		iDepartementService.desaffecterEmployeDuDepartement(employeId, depId);
 	}
 
 	// http://localhost:8081/SpringMVC/servlet/ajouterContrat
@@ -75,7 +77,7 @@ public class RestControlEmploye {
 	@PostMapping("/ajouterContrat")
 	@ResponseBody
 	public int ajouterContrat(@RequestBody Contrat contrat) {
-		iemployeservice.ajouterContrat(contrat);
+		iContratService.ajouterContrat(contrat);
 		return contrat.getReference();
 	}
 	
@@ -92,14 +94,14 @@ public class RestControlEmploye {
    @GetMapping(value = "getEmployePrenomById/{idemp}")
    @ResponseBody
    public String getEmployePrenomById(@PathVariable("idemp")int employeId) {
-		return iemployeservice.getEmployePrenomById(employeId);
+		return iContratService.getEmployePrenomById(employeId);
 	}
 
     // URL : http://localhost:8081/SpringMVC/servlet/deleteEmployeById/1
     @DeleteMapping("/deleteEmployeById/{idemp}") 
 	@ResponseBody 
 	public void deleteEmployeById(@PathVariable("idemp")int employeId) {
-		iemployeservice.deleteEmployeById(employeId);
+		iContratService.deleteEmployeById(employeId);
 		
 	}
     
@@ -107,7 +109,7 @@ public class RestControlEmploye {
     @DeleteMapping("/deleteContratById/{idcontrat}") 
 	@ResponseBody
 	public void deleteContratById(@PathVariable("idcontrat")int contratId) {
-		iemployeservice.deleteContratById(contratId);
+		iContratService.deleteContratById(contratId);
 	}
 
     
@@ -132,14 +134,14 @@ public class RestControlEmploye {
     @ResponseBody
 	public List<Employe> getAllEmployeByEntreprise(@PathVariable("identreprise") int identreprise) {
     	Entreprise entreprise=ientrepriseservice.getEntrepriseById(identreprise);
-		return iemployeservice.getAllEmployeByEntreprise(entreprise);
+		return iDepartementService.getAllEmployeByEntreprise(entreprise);
 	}
 
  // Modifier email : http://localhost:8081/SpringMVC/servlet/mettreAjourEmailByEmployeIdJPQL/2/newemail
  	@PutMapping(value = "/mettreAjourEmailByEmployeIdJPQL/{id}/{newemail}") 
  	@ResponseBody
 	public void mettreAjourEmailByEmployeIdJPQL(@PathVariable("newemail") String email, @PathVariable("id") int employeId) {	
-	iemployeservice.mettreAjourEmailByEmployeIdJPQL(email, employeId);
+	iDepartementService.mettreAjourEmailByEmployeIdJPQL(email, employeId);
 		
 	}
 
@@ -147,7 +149,7 @@ public class RestControlEmploye {
     @DeleteMapping("/deleteAllContratJPQL") 
 	@ResponseBody
 	public void deleteAllContratJPQL() {
-		iemployeservice.deleteAllContratJPQL();
+		iContratService.deleteAllContratJPQL();
 		
 	}
 
@@ -162,14 +164,14 @@ public class RestControlEmploye {
     @GetMapping(value = "getSalaireMoyenByDepartementId/{iddept}")
     @ResponseBody
 	public Double getSalaireMoyenByDepartementId(@PathVariable("iddept")int departementId) {
-		return iemployeservice.getSalaireMoyenByDepartementId(departementId);
+		return iDepartementService.getSalaireMoyenByDepartementId(departementId);
 	}
 
 	
 	//TODO
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
 			Date dateFin) {
-		return iemployeservice.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
+		return iContratService.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
 	}
 
 
