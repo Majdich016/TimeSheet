@@ -66,4 +66,13 @@ public class EmployeServiceImpl implements IEmployeService {
 				return (List<Employe>) employeRepository.findAll();
 	}
 
+	public void affecterContratAEmploye(int contratId, int employeId) {
+		Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
+		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+
+		contratManagedEntity.setEmploye(employeManagedEntity);
+		contratRepoistory.save(contratManagedEntity);
+
+	}
+
 }
