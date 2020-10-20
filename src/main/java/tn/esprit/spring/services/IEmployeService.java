@@ -23,6 +23,8 @@ public interface IEmployeService {
 
 	public List<Employe> getAllEmployes();
 
+	public void affecterContratAEmploye(int contratId, int employeId);
+
 	
 	
 	
