@@ -31,7 +31,7 @@ public class ContratServiceImpl implements IContratService {
 
 	public int ajouterContrat(Contrat contrat) {
 		contratRepoistory.save(contrat);
-		System.out.println("aaa");
+	
 		return contrat.getReference();
 	}
 
