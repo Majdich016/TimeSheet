@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,17 +33,22 @@ public class EmployeServiceImpl implements IEmployeService {
 	@Autowired
 	TimesheetRepository timesheetRepository;
 
+	private final Logger log = LoggerFactory.getLogger(EmployeServiceImpl.class);
+
 	public int ajouterEmploye(Employe employe) {
+		log.debug("request to save Employe:", employe);
+
 		employeRepository.save(employe);
-		System.out.println("test git");
+
 		return employe.getId();
 
 	}
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
+		log.debug("request to update Employe:", employeId);
 		Employe employe = employeRepository.findById(employeId).get();
 		employe.setEmail(email);
-		System.out.println("test test");
+
 		employeRepository.save(employe);
 
 	}
@@ -49,24 +56,29 @@ public class EmployeServiceImpl implements IEmployeService {
 
 
 	public int getNombreEmployeJPQL() {
+		log.debug("request to get Nombre Employe:");
 		return employeRepository.countemp();
 	}
-	
+
 	public List<String> getAllEmployeNamesJPQL() {
+		log.debug("request to get all Employe by names:");
 		return employeRepository.employeNames();
 
 	}
 
 	public float getSalaireByEmployeIdJPQL(int employeId) {
+		log.debug("request to get salaire Employe by id:",employeId);
 		return employeRepository.getSalaireByEmployeIdJPQL(employeId);
 	}
 
 
 	public List<Employe> getAllEmployes() {
+		log.debug("request to get all Employes:");
 				return (List<Employe>) employeRepository.findAll();
 	}
 
 	public void affecterContratAEmploye(int contratId, int employeId) {
+		log.debug("request to affecter Contrat by id{} to Employe by id {}:",contratId,employeId);
 		Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
 		Employe employeManagedEntity = employeRepository.findById(employeId).get();
 
