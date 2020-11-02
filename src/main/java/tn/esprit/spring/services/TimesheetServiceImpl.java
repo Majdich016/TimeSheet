@@ -67,7 +67,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		System.out.println("In valider Timesheet");
 		Employe validateur = employeRepository.findById(validateurId).get();
 		Mission mission = missionRepository.findById(missionId).get();
-		//verifier s'il est un chef de departement (interet des enum)
+
 		if(!validateur.getRole().equals(Role.CHEF_DEPARTEMENT)){
 			//System.out.println("l'employe doit etre chef de departement pour valider une feuille de temps !");
 			l.info("l'employe doit etre chef de departement pour valider une feuille de temps !");
