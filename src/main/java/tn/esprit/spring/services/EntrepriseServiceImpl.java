@@ -27,6 +27,7 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	
 	public int ajouterEntreprise(Entreprise entreprise) {
 		try {
+
 		logger.debug("je viens de lacer l'ajout d'une entreprise. ");
 
 		entrepriseRepoistory.save(entreprise);
