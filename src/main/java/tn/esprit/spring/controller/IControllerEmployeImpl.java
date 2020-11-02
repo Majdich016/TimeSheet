@@ -110,18 +110,6 @@ public class IControllerEmployeImpl  {
 	}
 
 	
-	public float getSalaireByEmployeIdJPQL(int employeId) {
-		// TODO Auto-generated method stub
-		return iemployeservice.getSalaireByEmployeIdJPQL(employeId);
-	}
-
-
-	public Double getSalaireMoyenByDepartementId(int departementId) {
-		// TODO Auto-generated method stub
-		return iDepartementService.getSalaireMoyenByDepartementId(departementId);
-	}
-
-	
 	
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
 			Date dateFin) {
