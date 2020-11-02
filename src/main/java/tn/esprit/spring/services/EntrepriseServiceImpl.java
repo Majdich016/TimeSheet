@@ -111,10 +111,11 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	@Transactional
 	public void deleteEntrepriseById(int entrepriseId) {
 		try {
-		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());
 
-		logger.info("Entreprise "+entrepriseRepoistory.findById(entrepriseId).get().getName()
-					+"est supprimé de la liste des entreprise");
+			logger.info("Entreprise "+entrepriseRepoistory.findById(entrepriseId).get().getName()
+					+" est supprimé de la liste des entreprise");
+
+		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());
 
 		}catch (Exception e){
 			logger.error("Erreur dans deleteEntrepriseById(): "+ e);
@@ -126,10 +127,11 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	@Transactional
 	public void deleteDepartementById(int depId) {
 		try {
-		deptRepoistory.delete(deptRepoistory.findById(depId).get());
 
-		logger.info("Departement "+deptRepoistory.findById(depId).get().getName()
+			logger.info("Departement "+deptRepoistory.findById(depId).get().getName()
 					+"est supprimé de la liste des departements");
+
+		deptRepoistory.delete(deptRepoistory.findById(depId).get());
 
 		}catch (Exception e){
 			logger.error("Erreur dans deleteDepartementById(): "+ e);
@@ -145,8 +147,8 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 		try {
 			entreprise = entrepriseRepoistory.findById(entrepriseId).get();
 
-			logger.info("Entreprise " + entrepriseRepoistory.findById(entrepriseId).get().getName()
-					+ "est récupérer de la liste des entreprises");
+			logger.info("Entreprise " + entreprise.getName()
+					+ " est récupérer de la liste des entreprises");
 
 		} catch (Exception e) {
 			logger.error("Erreur dans getEntrepriseById(): " + e);
