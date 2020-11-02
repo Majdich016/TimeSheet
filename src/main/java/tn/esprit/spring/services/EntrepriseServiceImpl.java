@@ -2,6 +2,7 @@ package tn.esprit.spring.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EntrepriseRepository;
+
+import javax.swing.text.html.Option;
 
 @Service
 public class EntrepriseServiceImpl implements IEntrepriseService {
@@ -70,13 +73,20 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 
 			logger.debug("je viens de lacer l'affectation d'un deparetemnt à une entreprise. ");
 
-				Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).get();
-				Departement depManagedEntity = deptRepoistory.findById(depId).get();
-				
-				depManagedEntity.setEntreprise(entrepriseManagedEntity);
-				deptRepoistory.save(depManagedEntity);
+				Optional<Entreprise> valueEnt = entrepriseRepoistory.findById(entrepriseId);
+				Optional<Departement> valueDep = deptRepoistory.findById(depId);
 
-				logger.info("le departement et bien affécté à l'entreprise !!");
+					if(valueEnt.isPresent() && valueDep.isPresent()) {
+
+					Entreprise entrepriseManagedEntity=valueEnt.get();
+					Departement depManagedEntity=valueDep.get();
+
+					depManagedEntity.setEntreprise(entrepriseManagedEntity);
+					deptRepoistory.save(depManagedEntity);
+
+					logger.info("le departement et bien affécté à l'entreprise !!");
+
+					}
 
 		}catch (Exception e){
 			logger.error("Erreur dans affecterDepartementAEntreprise(): "+ e);
@@ -88,16 +98,22 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	
 	public List<String> getAllDepartementsNamesByEntreprise(int entrepriseId) {
 
-		Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).get();
+
+		Optional<Entreprise> valueEnt = entrepriseRepoistory.findById(entrepriseId);
 		List<String> depNames = new ArrayList<>();
 
 		try {
 
-		for(Departement dep : entrepriseManagedEntity.getDepartements()){
-			depNames.add(dep.getName());
-		}
+		if(valueEnt.isPresent()) {
+
+			Entreprise entrepriseManagedEntity=valueEnt.get();
+
+			for (Departement dep : entrepriseManagedEntity.getDepartements()) {
+				depNames.add(dep.getName());
+			}
 
 			logger.info("les departement sont récupérés de la liste des entreprises");
+		}
 
 		} catch (Exception e) {
 			logger.error("Erreur dans getAllDepartementsNamesByEntreprise(): " + e);
@@ -112,11 +128,15 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	public void deleteEntrepriseById(int entrepriseId) {
 		try {
 
-			logger.info("Entreprise "+entrepriseRepoistory.findById(entrepriseId).get().getName()
-					+" est supprimé de la liste des entreprise");
+			Optional<Entreprise> valueEnt=entrepriseRepoistory.findById(entrepriseId);
+			if(valueEnt.isPresent()) {
 
-		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());
+				Entreprise ent=valueEnt.get();
 
+				entrepriseRepoistory.delete(ent);
+
+				logger.info("Entreprise est supprimé de la liste des entreprise");
+			}
 		}catch (Exception e){
 			logger.error("Erreur dans deleteEntrepriseById(): "+ e);
 		} finally {
@@ -128,11 +148,16 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	public void deleteDepartementById(int depId) {
 		try {
 
-			logger.info("Departement "+deptRepoistory.findById(depId).get().getName()
-					+"est supprimé de la liste des departements");
+			Optional<Departement> valueDep=deptRepoistory.findById(depId);
 
-		deptRepoistory.delete(deptRepoistory.findById(depId).get());
+			if(valueDep.isPresent()) {
 
+				Departement dep=valueDep.get();
+
+				deptRepoistory.delete(dep);
+
+				logger.info("Departement est supprimé de la liste des departements");
+			}
 		}catch (Exception e){
 			logger.error("Erreur dans deleteDepartementById(): "+ e);
 		} finally {
@@ -143,13 +168,17 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 
 
 	public Entreprise getEntrepriseById(int entrepriseId) {
+
 		Entreprise entreprise = new Entreprise();
+
 		try {
-			entreprise = entrepriseRepoistory.findById(entrepriseId).get();
+			Optional<Entreprise> valueEnt = entrepriseRepoistory.findById(entrepriseId);
+			if(valueEnt.isPresent()) {
 
-			logger.info("Entreprise " + entreprise.getName()
-					+ " est récupérer de la liste des entreprises");
+				entreprise=valueEnt.get();
 
+				logger.info("Entreprise est récupérer de la liste des entreprises");
+			}
 		} catch (Exception e) {
 			logger.error("Erreur dans getEntrepriseById(): " + e);
 		} finally {
