@@ -3,6 +3,7 @@ package tn.esprit.spring.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,53 +38,131 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	public int ajouterEmploye(Employe employe) {
 		log.debug("request to save Employe:", employe);
+		try {
+			employeRepository.save(employe);
+			log.info("employee has been add with succes !!");
+			return employe.getId();
 
-		employeRepository.save(employe);
-
-		return employe.getId();
-
+		} catch (Exception e) {
+			log.error("error methode add employe" + e);
+			return -1;
+		}
 	}
 
-	public void mettreAjourEmailByEmployeId(String email, int employeId) {
+
+	public int mettreAjourEmailByEmployeId(String email, int employeId) {
 		log.debug("request to update Employe:", employeId);
-		Employe employe = employeRepository.findById(employeId).get();
-		employe.setEmail(email);
+		try {
 
-		employeRepository.save(employe);
+			Optional<Employe> value = employeRepository.findById(employeId);
+			if (value.isPresent()) {
+
+				Employe employe = value.get();
+				log.debug("EmployeById." + employe);
+
+
+				employe.setEmail(email);
+
+				employeRepository.save(employe);
+				log.info("mettreAjourEmailByEmployeId done!!!! ");
+
+
+				return 1;
+			}
+			return 1;
+		} catch (Exception e) {
+			log.error("error methode add mettreAjourEmailByEmployeId" + e);
+			return -1;
+		}
 
 	}
+
 
 
 
 	public int getNombreEmployeJPQL() {
 		log.debug("request to get Nombre Employe:");
-		return employeRepository.countemp();
+		try {
+int i= employeRepository.countemp();
+			log.info("getNombreEmployeJPQL done!!!! ");
+			return i;
+		}catch (Exception e){
+			log.error("error methode getNombreEmployeJPQL " +e);
+			return -1;
+		}
+
 	}
 
 	public List<String> getAllEmployeNamesJPQL() {
 		log.debug("request to get all Employe by names:");
-		return employeRepository.employeNames();
+		try {
+			List<String > list= employeRepository.employeNames();
+			log.info("getAllEmployeNamesJPQL don !! ");
+			return list;
+
+		} catch (Exception e ){
+			log.error("error methode getNombreEmployeJPQL " +e);
+			return null ;
+		}
+
 
 	}
 
 	public float getSalaireByEmployeIdJPQL(int employeId) {
 		log.debug("request to get salaire Employe by id:",employeId);
-		return employeRepository.getSalaireByEmployeIdJPQL(employeId);
+		try {
+			float a= employeRepository.getSalaireByEmployeIdJPQL(employeId);
+			log.info("getSalaireByEmployeIdJPQL done !!");
+
+			return a;
+
+		} catch (Exception e ){
+			log.error("error methode getSalaireByEmployeIdJPQL" +e);
+			return -1;
+		}
+
 	}
 
 
 	public List<Employe> getAllEmployes() {
 		log.debug("request to get all Employes:");
-				return (List<Employe>) employeRepository.findAll();
+		try {
+
+			return (List<Employe>) employeRepository.findAll();
+			//log.info("getAllEmployes done!!");
+		} catch (Exception e) {
+			log.error("error methodeg etAllEmployes" + e);
+			return null ;
+		}
+
 	}
 
-	public void affecterContratAEmploye(int contratId, int employeId) {
-		log.debug("request to affecter Contrat by id{} to Employe by id {}:",contratId,employeId);
-		Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
 
-		contratManagedEntity.setEmploye(employeManagedEntity);
-		contratRepoistory.save(contratManagedEntity);
+	public int affecterContratAEmploye(int contratId, int employeId) {
+		log.debug("request to affecter Contrat by id{} to Employe by id {}:",contratId,employeId);
+		try {
+			log.info("affecterContratAEmploye");
+			Optional<Contrat> contratManagedEntity =contratRepoistory.findById(contratId);
+			Optional<Employe> value = employeRepository.findById(employeId);
+	if (contratManagedEntity.isPresent()){
+		Contrat contrat=contratManagedEntity.get();
+		if (value.isPresent()){
+			Employe employe=value.get();
+			contrat.setEmploye(employe);
+
+		}
+		contratRepoistory.save(contrat);
+
+	}
+			log.info("affecterContratAEmploye done !!");
+			return 1;
+
+
+		}catch (Exception e){
+			log.error("rror methode affecterContratAEmploye" +e);
+			return -1;
+		}
+
 
 	}
 

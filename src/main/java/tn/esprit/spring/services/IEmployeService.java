@@ -13,12 +13,12 @@ import tn.esprit.spring.entities.Timesheet;
 public interface IEmployeService {
 	
 	public int ajouterEmploye(Employe employe);
-	public void mettreAjourEmailByEmployeId(String email, int employeId);
+	public int mettreAjourEmailByEmployeId(String email, int employeId);
 	public int getNombreEmployeJPQL();
 	public List<String> getAllEmployeNamesJPQL();
 	public float getSalaireByEmployeIdJPQL(int employeId);
 	public List<Employe> getAllEmployes();
-	public void affecterContratAEmploye(int contratId, int employeId);
+	public int affecterContratAEmploye(int contratId, int employeId);
 
 	
 	
