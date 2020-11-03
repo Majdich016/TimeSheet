@@ -3,6 +3,7 @@ package tn.esprit.spring.services;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,13 +40,20 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	}
     
 	public void affecterMissionADepartement(int missionId, int depId) {
-		Mission mission = missionRepository.findById(missionId).get();
-		Departement dep = deptRepoistory.findById(depId).get();
+		try{
+		Optional<Mission> value1 = missionRepository.findById(missionId);
+		Optional<Departement> value2 = deptRepoistory.findById(depId);
+		if(value1.isPresent() && value2.isPresent()){
+			Mission mission = value1.get();
+			Departement dep = value2.get();
 		mission.setDepartement(dep);
 		l.info("la mission est affectée au departement");
 		missionRepository.save(mission);
-		
-		
+		}
+	} catch (Exception e) {
+		l.error("Erreur dans deleteEmployeById" + e);
+
+	}
 		
 	}
 
@@ -66,10 +74,14 @@ public class TimesheetServiceImpl implements ITimesheetService {
 
 	
 	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
+		try{
 		System.out.println("In valider Timesheet");
-		Employe validateur = employeRepository.findById(validateurId).get();
-		Mission mission = missionRepository.findById(missionId).get();
-
+		Optional<Employe> value1 = employeRepository.findById(validateurId);
+		Optional<Mission> value2 = missionRepository.findById(missionId);
+		if(value1.isPresent() && value2.isPresent()){
+		//verifier s'il est un chef de departement (interet des enum)
+			Employe validateur = value1.get();
+			Mission mission = value2.get();
 		if(!validateur.getRole().equals(Role.CHEF_DEPARTEMENT)){
 			//System.out.println("l'employe doit etre chef de departement pour valider une feuille de temps !");
 			l.info("l'employe doit etre chef de departement pour valider une feuille de temps !");
@@ -97,6 +109,13 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 		System.out.println("dateDebut : " + dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
 		l.info("dateDebut : " + dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
+		
+		}
+	} catch (Exception e) {
+		l.error("Erreur dans deleteEmployeById" + e);
+
+	}
+		
 	}
 
 	
