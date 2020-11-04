@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.services.EntrepriseServiceImpl;
+import tn.esprit.spring.services.IEntrepriseService;
 
 import java.util.List;
 
@@ -19,14 +20,16 @@ import static org.junit.Assert.assertNotNull;
 public class EntrepriseServiceImplTest {
 
     @Autowired
-    EntrepriseServiceImpl entrepriseService;
+    IEntrepriseService entrepriseService;
+
+    Integer a,b;
 
     @Test
     public void testAjouterEntreprise(){
 
         Entreprise ent=new Entreprise("sofrecom","lac1");
-        entrepriseService.ajouterEntreprise(ent);
-        assertNotNull(entrepriseService.ajouterEntreprise(ent));
+        a= entrepriseService.ajouterEntreprise(ent);
+        assertNotNull(a);
 
 
     }
@@ -44,8 +47,8 @@ public class EntrepriseServiceImplTest {
     public void testAjouterDepartement(){
 
         Departement dep=new Departement("ooredoo");
-        entrepriseService.ajouterDepartement(dep);
-        assertNotNull(entrepriseService.ajouterDepartement(dep));
+        b=entrepriseService.ajouterDepartement(dep);
+        assertNotNull(b);
     }
 
 
