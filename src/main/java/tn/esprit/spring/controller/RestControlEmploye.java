@@ -38,6 +38,13 @@ public class RestControlEmploye {
 	
 	
 
+	@PostMapping("/ajouterEmployer")
+	@ResponseBody
+	public Employe ajouterEmploye(@RequestBody Employe employe)
+	{
+		iemployeservice.ajouterEmploye(employe);
+		return employe;
+	}
 	
 	// Modifier email : http://localhost:8081/SpringMVC/servlet/modifyEmail/1/newemail
 	@PutMapping(value = "/modifyEmail/{id}/{newemail}") 
@@ -60,6 +67,12 @@ public class RestControlEmploye {
 		iDepartementService.desaffecterEmployeDuDepartement(employeId, depId);
 	}
 
+	@PostMapping("/ajouterContrat")
+	@ResponseBody
+	public int ajouterContrat(@RequestBody Contrat contrat) {
+		iContratService.ajouterContrat(contrat);
+		return contrat.getReference();
+	}
 	
 	// http://localhost:8081/SpringMVC/servlet/affecterContratAEmploye/6/1
    @PutMapping(value = "/affecterContratAEmploye/{idcontrat}/{idemp}") 
