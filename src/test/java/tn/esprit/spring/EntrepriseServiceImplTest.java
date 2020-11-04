@@ -23,17 +23,18 @@ public class EntrepriseServiceImplTest {
 
     @Test
     public void testAjouterEntreprise(){
-        Entreprise ent=new Entreprise();
-        ent.setId(7);
-        ent.setName("Sopra");
-        ent.setRaisonSocial("Lac3");
 
-        assertEquals(7,entrepriseService.ajouterEntreprise(ent));
+        Entreprise ent=new Entreprise("sofrecom","lac1");
+        entrepriseService.ajouterEntreprise(ent);
+        assertNotNull(entrepriseService.ajouterEntreprise(ent));
+
+
     }
 
     @Test
     public void testGetEntrepriseById(){
-        Entreprise ent= entrepriseService.getEntrepriseById(11);
+
+        Entreprise ent= entrepriseService.getEntrepriseById(13);
 
         assertNotNull(ent);
 
@@ -41,37 +42,36 @@ public class EntrepriseServiceImplTest {
 
     @Test
     public void testAjouterDepartement(){
-        Departement dep=new Departement();
-        dep.setId(8);
-        dep.setName("ooredoo");
 
-        assertEquals(8,entrepriseService.ajouterDepartement(dep));
+        Departement dep=new Departement("ooredoo");
+        entrepriseService.ajouterDepartement(dep);
+        assertNotNull(entrepriseService.ajouterDepartement(dep));
     }
 
-    @Test
-    public void testAffecterDepartementAEntreprise(){
-        entrepriseService.affecterDepartementAEntreprise(11,11);
-
-        assertNotNull(entrepriseService.getAllDepartementsNamesByEntreprise(11));
-
-    }
 
     @Test
     public void testGetAllDepartementsNamesByEntreprise(){
 
-        List<String> depNames= entrepriseService.getAllDepartementsNamesByEntreprise(11);
+        List<String> depNames= entrepriseService.getAllDepartementsNamesByEntreprise(15);
         assertNotNull(depNames);
     }
 
     @Test
+    public void testAffecterDepartementAEntreprise(){
+
+        entrepriseService.affecterDepartementAEntreprise(19,15);
+
+    }
+
+/*    @Test
     public void testDeleteDepartementById(){
-        entrepriseService.deleteDepartementById(11);
+        entrepriseService.deleteDepartementById(13);
     }
 
     @Test
     public void testDeleteEntrepriseById(){
-        entrepriseService.deleteEntrepriseById(11);
-    }
+        entrepriseService.deleteEntrepriseById(12);
+    }*/
 
 
 
