@@ -24,11 +24,19 @@ public class EntrepriseServiceImplTest {
     @Test
     public void testAjouterEntreprise(){
         Entreprise ent=new Entreprise();
-        ent.setId(4);
+        ent.setId(6);
         ent.setName("Sopra");
-        ent.setRaisonSocial("Lac2");
+        ent.setRaisonSocial("Lac3");
 
-        assertEquals(4,entrepriseService.ajouterEntreprise(ent));
+        assertEquals(6,entrepriseService.ajouterEntreprise(ent));
+    }
+
+    @Test
+    public void testGetEntrepriseById(){
+        Entreprise ent= entrepriseService.getEntrepriseById(3);
+
+        assertNotNull(ent);
+
     }
 
     @Test
@@ -42,22 +50,17 @@ public class EntrepriseServiceImplTest {
 
     @Test
     public void testAffecterDepartementAEntreprise(){
-        entrepriseService.affecterDepartementAEntreprise(3,4);
+        entrepriseService.affecterDepartementAEntreprise(3,6);
 
-        assertEquals("ooredoo",entrepriseService.getAllDepartementsNamesByEntreprise(4).get(0));
+        assertEquals("ooredoo",entrepriseService.getAllDepartementsNamesByEntreprise(6).get(0));
 
     }
 
     @Test
     public void testGetAllDepartementsNamesByEntreprise(){
 
-        List<String> depNames= entrepriseService.getAllDepartementsNamesByEntreprise(4);
+        List<String> depNames= entrepriseService.getAllDepartementsNamesByEntreprise(6);
         assertNotNull(depNames);
-    }
-
-    @Test
-    public void testDeleteEntrepriseById(){
-        entrepriseService.deleteEntrepriseById(4);
     }
 
     @Test
@@ -66,11 +69,12 @@ public class EntrepriseServiceImplTest {
     }
 
     @Test
-    public void testGetEntrepriseById(){
-        Entreprise ent= entrepriseService.getEntrepriseById(4);
-
-        assertNotNull(ent);
-
+    public void testDeleteEntrepriseById(){
+        entrepriseService.deleteEntrepriseById(6);
     }
+
+
+
+
 
 }
