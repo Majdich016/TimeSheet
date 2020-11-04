@@ -3,7 +3,7 @@ package tn.esprit.spring.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,10 +15,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 
 @Entity
@@ -70,6 +69,16 @@ public class Employe implements Serializable {
 		this.email = email;
 		this.isActif = isActif;
 		this.role = role;
+	}
+	public Employe(String nom, String prenom) {
+		this.nom = nom;
+		this.prenom = prenom;
+
+	}
+	public Employe(String email) {
+
+		this.email = email;
+
 	}
 	
 	public int getId() {

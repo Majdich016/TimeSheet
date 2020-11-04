@@ -40,6 +40,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	}
     
 	public void affecterMissionADepartement(int missionId, int depId) {
+
 		try{
 		Optional<Mission> value1 = missionRepository.findById(missionId);
 		Optional<Departement> value2 = deptRepoistory.findById(depId);
@@ -76,6 +77,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
 		try{
 		System.out.println("In valider Timesheet");
+
 		Optional<Employe> value1 = employeRepository.findById(validateurId);
 		Optional<Mission> value2 = missionRepository.findById(missionId);
 		if(value1.isPresent() && value2.isPresent()){
@@ -94,13 +96,8 @@ public class TimesheetServiceImpl implements ITimesheetService {
 				chefDeLaMission = true;
 				break;
 			}
-		}
-		if(!chefDeLaMission){
-			//System.out.println("l'employe doit etre chef de departement de la mission en question");
-			l.info("l'employe doit etre chef de departement de la mission en question");
-			return;
-		}
 //
+
 		TimesheetPK timesheetPK = new TimesheetPK(missionId, employeId, dateDebut, dateFin);
 		Timesheet timesheet =timesheetRepository.findBytimesheetPK(timesheetPK);
 		timesheet.setValide(true);
@@ -115,7 +112,6 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		l.error("Erreur dans la validation de la timesheet" + e);
 
 	}
-		
 	}
 
 	
