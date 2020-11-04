@@ -33,7 +33,7 @@ public class EntrepriseServiceImplTest {
 
     @Test
     public void testGetEntrepriseById(){
-        Entreprise ent= entrepriseService.getEntrepriseById(10);
+        Entreprise ent= entrepriseService.getEntrepriseById(11);
 
         assertNotNull(ent);
 
@@ -50,27 +50,27 @@ public class EntrepriseServiceImplTest {
 
     @Test
     public void testAffecterDepartementAEntreprise(){
-        entrepriseService.affecterDepartementAEntreprise(10,10);
+        entrepriseService.affecterDepartementAEntreprise(11,11);
 
-        assertNotNull(entrepriseService.getAllDepartementsNamesByEntreprise(10));
+        assertNotNull(entrepriseService.getAllDepartementsNamesByEntreprise(11));
 
     }
 
     @Test
     public void testGetAllDepartementsNamesByEntreprise(){
 
-        List<String> depNames= entrepriseService.getAllDepartementsNamesByEntreprise(10);
+        List<String> depNames= entrepriseService.getAllDepartementsNamesByEntreprise(11);
         assertNotNull(depNames);
     }
 
     @Test
     public void testDeleteDepartementById(){
-        entrepriseService.deleteDepartementById(10);
+        entrepriseService.deleteDepartementById(11);
     }
 
     @Test
     public void testDeleteEntrepriseById(){
-        entrepriseService.deleteEntrepriseById(10);
+        entrepriseService.deleteEntrepriseById(11);
     }
 
 
