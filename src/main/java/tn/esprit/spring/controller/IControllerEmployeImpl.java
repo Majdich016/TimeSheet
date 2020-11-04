@@ -32,11 +32,15 @@ public class IControllerEmployeImpl  {
 	public int ajouterEmploye(Employe employe)
 	{
 		iemployeservice.ajouterEmploye(employe);
+		
+
+		
 		return employe.getId();
 	}
     
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		iemployeservice.mettreAjourEmailByEmployeId(email, employeId);
+
 	}
 
 	public void affecterEmployeADepartement(int employeId, int depId) {
