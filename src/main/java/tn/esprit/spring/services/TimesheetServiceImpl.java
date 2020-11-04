@@ -51,7 +51,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		missionRepository.save(mission);
 		}
 	} catch (Exception e) {
-		l.error("Erreur dans deleteEmployeById" + e);
+		l.error("Erreur dans l'affectation de la mission" + e);
 
 	}
 		
@@ -112,7 +112,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 		}
 	} catch (Exception e) {
-		l.error("Erreur dans deleteEmployeById" + e);
+		l.error("Erreur dans la validation de la timesheet" + e);
 
 	}
 		
