@@ -25,8 +25,7 @@ public class EntrepriseServiceImplTest {
     public void testAjouterEntreprise(){
 
         Entreprise ent=new Entreprise("sofrecom","lac1");
-        int entt=entrepriseService.ajouterEntreprise(ent);
-        assertNotNull(entt);
+        assertNotNull(entrepriseService.ajouterEntreprise(ent));
 
 
     }
@@ -44,8 +43,7 @@ public class EntrepriseServiceImplTest {
     public void testAjouterDepartement(){
 
         Departement dep=new Departement("ooredoo");
-        int depp=entrepriseService.ajouterDepartement(dep);
-        assertNotNull(depp);
+        assertNotNull(entrepriseService.ajouterDepartement(dep));
     }
 
 
@@ -59,7 +57,7 @@ public class EntrepriseServiceImplTest {
     @Test
     public void testAffecterDepartementAEntreprise(){
 
-        entrepriseService.affecterDepartementAEntreprise(20,15);
+        entrepriseService.affecterDepartementAEntreprise(21,15);
 
     }
 
