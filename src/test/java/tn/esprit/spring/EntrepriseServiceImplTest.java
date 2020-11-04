@@ -24,16 +24,16 @@ public class EntrepriseServiceImplTest {
     @Test
     public void testAjouterEntreprise(){
         Entreprise ent=new Entreprise();
-        ent.setId(6);
+        ent.setId(7);
         ent.setName("Sopra");
         ent.setRaisonSocial("Lac3");
 
-        assertEquals(6,entrepriseService.ajouterEntreprise(ent));
+        assertEquals(7,entrepriseService.ajouterEntreprise(ent));
     }
 
     @Test
     public void testGetEntrepriseById(){
-        Entreprise ent= entrepriseService.getEntrepriseById(3);
+        Entreprise ent= entrepriseService.getEntrepriseById(7);
 
         assertNotNull(ent);
 
@@ -42,35 +42,35 @@ public class EntrepriseServiceImplTest {
     @Test
     public void testAjouterDepartement(){
         Departement dep=new Departement();
-        dep.setId(3);
+        dep.setId(8);
         dep.setName("ooredoo");
 
-        assertEquals(3,entrepriseService.ajouterDepartement(dep));
+        assertEquals(8,entrepriseService.ajouterDepartement(dep));
     }
 
     @Test
     public void testAffecterDepartementAEntreprise(){
-        entrepriseService.affecterDepartementAEntreprise(3,6);
+        entrepriseService.affecterDepartementAEntreprise(8,7);
 
-        assertEquals("ooredoo",entrepriseService.getAllDepartementsNamesByEntreprise(6).get(0));
+        assertEquals("ooredoo",entrepriseService.getAllDepartementsNamesByEntreprise(7).get(0));
 
     }
 
     @Test
     public void testGetAllDepartementsNamesByEntreprise(){
 
-        List<String> depNames= entrepriseService.getAllDepartementsNamesByEntreprise(6);
+        List<String> depNames= entrepriseService.getAllDepartementsNamesByEntreprise(7);
         assertNotNull(depNames);
     }
 
     @Test
     public void testDeleteDepartementById(){
-        entrepriseService.deleteDepartementById(3);
+        entrepriseService.deleteDepartementById(8);
     }
 
     @Test
     public void testDeleteEntrepriseById(){
-        entrepriseService.deleteEntrepriseById(6);
+        entrepriseService.deleteEntrepriseById(7);
     }
 
 
