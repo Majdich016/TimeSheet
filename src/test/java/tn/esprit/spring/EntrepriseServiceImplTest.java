@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.services.EntrepriseServiceImpl;
+import tn.esprit.spring.services.IEntrepriseService;
 
 import java.util.List;
 
@@ -19,21 +20,24 @@ import static org.junit.Assert.assertNotNull;
 public class EntrepriseServiceImplTest {
 
     @Autowired
-    EntrepriseServiceImpl entrepriseService;
+    IEntrepriseService entrepriseService;
+
+    Integer a,b;
 
     @Test
     public void testAjouterEntreprise(){
-        Entreprise ent=new Entreprise();
-        ent.setId(7);
-        ent.setName("Sopra");
-        ent.setRaisonSocial("Lac3");
 
-        assertEquals(7,entrepriseService.ajouterEntreprise(ent));
+        Entreprise ent=new Entreprise("sofrecom","lac1");
+        a= entrepriseService.ajouterEntreprise(ent);
+        assertNotNull(a);
+
+
     }
 
     @Test
     public void testGetEntrepriseById(){
-        Entreprise ent= entrepriseService.getEntrepriseById(10);
+
+        Entreprise ent= entrepriseService.getEntrepriseById(13);
 
         assertNotNull(ent);
 
@@ -41,37 +45,36 @@ public class EntrepriseServiceImplTest {
 
     @Test
     public void testAjouterDepartement(){
-        Departement dep=new Departement();
-        dep.setId(8);
-        dep.setName("ooredoo");
 
-        assertEquals(8,entrepriseService.ajouterDepartement(dep));
+        Departement dep=new Departement("ooredoo");
+        b=entrepriseService.ajouterDepartement(dep);
+        assertNotNull(b);
     }
 
-    @Test
-    public void testAffecterDepartementAEntreprise(){
-        entrepriseService.affecterDepartementAEntreprise(10,10);
-
-        assertNotNull(entrepriseService.getAllDepartementsNamesByEntreprise(10));
-
-    }
 
     @Test
     public void testGetAllDepartementsNamesByEntreprise(){
 
-        List<String> depNames= entrepriseService.getAllDepartementsNamesByEntreprise(10);
+        List<String> depNames= entrepriseService.getAllDepartementsNamesByEntreprise(15);
         assertNotNull(depNames);
     }
 
     @Test
+    public void testAffecterDepartementAEntreprise(){
+
+        entrepriseService.affecterDepartementAEntreprise(22,15);
+
+    }
+
+/*    @Test
     public void testDeleteDepartementById(){
-        entrepriseService.deleteDepartementById(10);
+        entrepriseService.deleteDepartementById(13);
     }
 
     @Test
     public void testDeleteEntrepriseById(){
-        entrepriseService.deleteEntrepriseById(10);
-    }
+        entrepriseService.deleteEntrepriseById(12);
+    }*/
 
 
 
