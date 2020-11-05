@@ -62,7 +62,7 @@ public class EntrepriseServiceImplTest {
     @Test
     public void testAffecterDepartementAEntreprise(){
 
-        entrepriseService.affecterDepartementAEntreprise(22,15);
+        entrepriseService.affecterDepartementAEntreprise(26,15);
 
     }
 
